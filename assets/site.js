@@ -354,7 +354,7 @@
       if (micro)
         micro.innerHTML = micro.innerHTML.replace(
           "Digital kit • Launch preview",
-          "Digital delivery after purchase",
+          "Printable A4 files • Digital kit",
         );
     }
     const headline = $("#hero-title");
@@ -370,9 +370,16 @@
     $(".hero-description").textContent = p.subheadline;
 
     // One open answer at a time, with native hidden and ARIA relationships.
-    if (included)
+    if (included) {
       $("#faq-answer-1 p").textContent =
-        "This is a digital product. After your purchase, follow the file-access instructions provided by the verified checkout delivery process.";
+        "This is a digital product. Follow the access and delivery instructions in your Hotmart purchase confirmation.";
+      $("#faq-answer-4 p").textContent =
+        "These activities work well for classrooms. Check the license included with your purchase for permitted uses; adults should supervise cutting and assembly.";
+      $("#faq-answer-5 p").textContent =
+        "Printing and sharing permissions depend on the license provided with your purchase. Do not redistribute the files.";
+      $("#faq-answer-7 p").textContent =
+        "For purchase or access questions, use the support options in your Hotmart purchase confirmation.";
+    }
     if (p.license.approved && p.license.classroomUse)
       $("#faq-answer-4 p").textContent = p.license.classroomUse;
     if (p.license.approved && p.license.repeatPrinting)
