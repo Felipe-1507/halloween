@@ -2,7 +2,7 @@
 // Empty prices/checkout links keep purchases disabled. Do not add private keys.
 window.HALLOWEEN_CONFIG = {
   brand: "Halloween Monster Mask Kit",
-  siteUrl: "",
+  siteUrl: "https://halloween.felipeferreira.dev",
   supportEmail: "",
   businessName: "",
   headline: "100+ Printable\nHalloween\nMonster Masks\nKids Will Love!",
@@ -21,18 +21,18 @@ window.HALLOWEEN_CONFIG = {
   offers: {
     basic: {
       name: "Basic Pack",
-      enabled: false,
-      price: null,
+      enabled: true,
+      price: 6.90,
       originalPrice: null,
-      checkoutUrl: "",
+      checkoutUrl: "https://pay.hotmart.com/N107950515F",
       contentsApproved: false,
     },
     complete: {
       name: "Complete Halloween Pack",
       enabled: true,
-      price: null,
+      price: 13.90,
       originalPrice: null,
-      checkoutUrl: "",
+      checkoutUrl: "https://pay.hotmart.com/U107950767O",
       contentsApproved: false,
     },
   },
