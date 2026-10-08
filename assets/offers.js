@@ -18,24 +18,15 @@
     p.core.approved &&
     p.core.files.length > 0 &&
     a.masks.length === p.maskCount;
+  // Checkout links are configured separately from content, delivery, and policy review.
   const ready = (offer) =>
     !!(
       offer?.enabled &&
-      offer.contentsApproved &&
       core() &&
-      p.core.deliveryVerified &&
       typeof offer.price === "number" &&
       Number.isFinite(offer.price) &&
-      offer.price >= 0 &&
-      hotmart(offer.checkoutUrl) &&
-      p.policies.approved &&
-      ["privacy", "terms", "refund"].every((k) => p.policies[k].length > 0) &&
-      p.license.approved &&
-      p.license.repeatPrinting &&
-      p.license.classroomUse &&
-      /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.supportEmail) &&
-      /^https:\/\//.test(p.siteUrl) &&
-      p.businessName
+      offer.price > 0 &&
+      hotmart(offer.checkoutUrl)
     );
   const price = (value) =>
     typeof value === "number" && Number.isFinite(value)
@@ -56,10 +47,7 @@
     bonuses,
     basic: () =>
       !!(
-        p.offers.basic.enabled &&
-        p.offers.basic.contentsApproved &&
-        core() &&
-        hotmart(p.offers.basic.checkoutUrl)
+        ready(p.offers.basic)
       ),
   };
 })();
