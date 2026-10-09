@@ -2967,3 +2967,70 @@ button {
   syntax: "*";
   inherits: false;
 }
+
+/* Basic-to-Complete Halloween upgrade: follows the existing orange, purple and cream palette. */
+.halloween-upgrade-dialog {
+  width: min(94vw, 530px);
+  max-height: min(90vh, 760px);
+  padding: 0;
+  border: 3px solid #ff8c24;
+  border-radius: 27px;
+  background: #fff9f1;
+  color: #172033;
+  box-shadow: 0 26px 80px rgba(30, 14, 47, .32);
+  overflow: auto;
+}
+.halloween-upgrade-dialog::backdrop { background: rgba(25, 9, 38, .76); }
+.halloween-upgrade-dialog .upgrade-inner {
+  position: relative;
+  padding: clamp(24px, 5vw, 38px);
+  text-align: center;
+}
+.halloween-upgrade-dialog .upgrade-close {
+  position: absolute; top: 12px; right: 14px;
+  display: grid; place-items: center;
+  width: 38px; height: 38px; border: 0; border-radius: 50%;
+  font-size: 29px; line-height: 1; color: #34134f;
+  background: #f0dfed; cursor: pointer;
+}
+.halloween-upgrade-dialog .upgrade-close:focus-visible,
+.halloween-upgrade-dialog a:focus-visible { outline: 3px solid #34134f; outline-offset: 4px; }
+.halloween-upgrade-dialog .upgrade-eyebrow {
+  margin: 8px 26px 16px;
+  color: #7933a4; font-size: 12px; font-weight: 900; letter-spacing: .07em;
+}
+.halloween-upgrade-dialog h2 {
+  color: #34134f; font-size: clamp(26px, 5vw, 35px);
+  line-height: 1.12; margin: 0 0 15px;
+}
+.halloween-upgrade-dialog #upgrade-dialog-description {
+  font-size: 15px; line-height: 1.65; margin: 0 0 18px; color: #463b4d;
+}
+.halloween-upgrade-dialog .upgrade-prices {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: center; gap: 8px 13px; margin: 20px 0 22px;
+}
+.halloween-upgrade-dialog .upgrade-prices del { color: #7f7286; font-size: 21px; }
+.halloween-upgrade-dialog .upgrade-prices strong {
+  color: #f56817; font-size: clamp(40px, 8vw, 54px); line-height: 1;
+}
+.halloween-upgrade-dialog .upgrade-prices span {
+  flex-basis: 100%; font-size: 14px; font-weight: 800; color: #34134f;
+}
+.halloween-upgrade-dialog .upgrade-yes {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; min-height: 56px; padding: 12px 16px;
+  white-space: normal; line-height: 1.3;
+}
+.halloween-upgrade-dialog .upgrade-no {
+  display: block; margin: 19px auto 0;
+  color: #34134f; font-weight: 700; font-size: 13px;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.halloween-upgrade-dialog .upgrade-small {
+  margin: 19px 0 0; color: #726479; font-size: 11px;
+}
+@media (max-width: 480px) {
+  .halloween-upgrade-dialog .upgrade-inner { padding: 28px 18px 23px; }
+  .halloween-upgrade-dialog .upgrade-yes { font-size: 13px; }
+}
