@@ -36,6 +36,14 @@ window.HALLOWEEN_CONFIG = {
       contentsApproved: false,
     },
   },
+  // Special checkout for visitors who choose the Basic Pack.
+  // This is a separate Hotmart offer for the SAME Complete Pack.
+  upgrade: {
+    enabled: true,
+    price: 9.90,
+    regularPrice: 13.90,
+    checkoutUrl: "https://pay.hotmart.com/U107950767O?off=s6iekn78",
+  },
   bonuses: [
     {
       id: "headbands",
