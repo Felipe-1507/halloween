@@ -348,6 +348,67 @@
         .join("")}</tbody></table>`;
       pricing.before(comparison);
     }
+
+    // Offer the Complete Pack upgrade BEFORE a visitor leaves for Basic checkout.
+    // Closing the dialog leaves the customer on the page; "Keep Basic" proceeds.
+    const basicCheckout = p.offers.basic.checkoutUrl;
+    const upgrade = p.upgrade;
+    const hasUpgrade =
+      offer.ready(p.offers.basic) &&
+      offer.ready(p.offers.complete) &&
+      upgrade?.enabled &&
+      Number.isFinite(upgrade.price) &&
+      upgrade.price > p.offers.basic.price &&
+      upgrade.price < p.offers.complete.price &&
+      offer.hotmart(upgrade.checkoutUrl);
+    if (hasUpgrade) {
+      let upgradeDialog = null;
+      let upgradeTrigger = null;
+      const closeUpgrade = () => {
+        if (upgradeDialog?.open) upgradeDialog.close();
+      };
+      const showUpgrade = (trigger) => {
+        upgradeTrigger = trigger;
+        if (!upgradeDialog) {
+          upgradeDialog = document.createElement("dialog");
+          upgradeDialog.className = "halloween-upgrade-dialog";
+          upgradeDialog.setAttribute("aria-labelledby", "upgrade-dialog-title");
+          upgradeDialog.setAttribute("aria-describedby", "upgrade-dialog-description");
+          upgradeDialog.innerHTML = `
+            <div class="upgrade-inner">
+              <button type="button" class="upgrade-close" aria-label="Close upgrade offer">×</button>
+              <div class="upgrade-eyebrow">🎃 EXCLUSIVE HALLOWEEN UPGRADE</div>
+              <h2 id="upgrade-dialog-title">Wait! Make Halloween Even More Fun!</h2>
+              <p id="upgrade-dialog-description">Upgrade to the <strong>Complete Halloween Pack</strong> with 110 printable monster masks, 10 headbands, 30 photo booth props, and 3 illustrated craft guides.</p>
+              <div class="upgrade-prices">
+                <del>${offer.price(p.offers.complete.price)}</del>
+                <strong>${offer.price(upgrade.price)}</strong>
+                <span>Just ${offer.price(upgrade.price - p.offers.basic.price)} more than Basic!</span>
+              </div>
+              <a class="button button-primary upgrade-yes" href="${upgrade.checkoutUrl}" rel="noopener noreferrer" data-cta="upgrade-checkout">Yes! Get the Complete Pack for ${offer.price(upgrade.price)} ${icons.arrow}</a>
+              <a class="upgrade-no" href="${basicCheckout}" rel="noopener noreferrer" data-cta="basic-checkout-declined">No thanks, keep my Basic Pack for ${offer.price(p.offers.basic.price)}</a>
+              <p class="upgrade-small">Digital printable kit • Secure checkout by Hotmart</p>
+            </div>`;
+          upgradeDialog.querySelector(".upgrade-close").addEventListener("click", closeUpgrade);
+          upgradeDialog.addEventListener("click", (event) => {
+            if (event.target === upgradeDialog) closeUpgrade();
+          });
+          upgradeDialog.addEventListener("close", () => {
+            upgradeTrigger?.focus();
+          });
+          document.body.append(upgradeDialog);
+        }
+        upgradeDialog.showModal();
+        upgradeDialog.querySelector(".upgrade-close").focus();
+      };
+      document.addEventListener("click", (event) => {
+        const basicButton = event.target.closest('a[data-cta="basic-checkout"]');
+        if (!basicButton || !basicButton.closest("#pricing")) return;
+        event.preventDefault();
+        showUpgrade(basicButton);
+      });
+    }
+
     if (included) {
       $(".preview-strip")?.remove();
       const micro = $(".hero-micro");
