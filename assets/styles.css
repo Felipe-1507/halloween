@@ -2970,6 +2970,10 @@ button {
 
 /* Basic-to-Complete Halloween upgrade: follows the existing orange, purple and cream palette. */
 .halloween-upgrade-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  box-sizing: border-box;
   width: min(94vw, 530px);
   max-height: min(90vh, 760px);
   padding: 0;
